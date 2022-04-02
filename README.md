@@ -39,6 +39,9 @@ Twitterターゲット検索サービスです。
 ## 画面遷移図
 https://www.figma.com/file/YvyOA09Z26yQGqRi06g8pA/Twitter%E3%82%BF%E3%83%BC%E3%82%B2%E3%83%83%E3%83%88%E7%89%B9%E5%AE%9A%E6%94%AF%E6%8F%B4%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9?node-id=0%3A1
 
+## ER図
+https://drive.google.com/file/d/1KcbLNztUZrwFckz0BOFRbb-4eHE90zQV/view?usp=sharing
+
 ##　スケジュール
 README〜ER図作成：3/22 〆切
 メイン機能実装：3/23 - 5/18
