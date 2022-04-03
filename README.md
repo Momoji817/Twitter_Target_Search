@@ -42,8 +42,8 @@ https://www.figma.com/file/YvyOA09Z26yQGqRi06g8pA/Twitter%E3%82%BF%E3%83%BC%E3%8
 ## ER図
 https://drive.google.com/file/d/1KcbLNztUZrwFckz0BOFRbb-4eHE90zQV/view?usp=sharing
 
-##　スケジュール
-README〜ER図作成：3/22 〆切
-メイン機能実装：3/23 - 5/18
-β版をRUNTEQ内リリース（MVP）：5/19〆切
-本番リリース：5月末
+## スケジュール
+- README〜ER図作成：4/3 〆切
+- メイン機能実装：4/4 - 5/18
+- β版をRUNTEQ内リリース（MVP）：5/19〆切
+- 本番リリース：5月末
