@@ -119,8 +119,8 @@ Rails.application.config.sorcery.configure do |config|
     config.twitter.secret = Rails.application.credentials.twitter[:secret_key]
     config.twitter.callback_url = Settings.twitter[:callback_url]
     config.twitter.user_info_mapping = {
-      name: 'name'
-      profile_image_url: 'profile_image_url_https'
+      name: 'name',
+      profile_image_url: 'profile_image_url_https',
       account_url: 'url'
     }
   #
