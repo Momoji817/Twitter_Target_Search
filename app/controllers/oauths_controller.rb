@@ -7,20 +7,15 @@ class OauthsController < ApplicationController
 
   def callback
     provider = auth_params[:provider]
-    if auth_params[:denied].present?
-      redirect_to root_path, notice: "キャンセルしました"
-      return
-    end
     if @user = login_from(provider)
-      redirect_to root_path, notice: "#{provider.titleize}でログインしました"
+      @user.authentication.update!(
+        access_token: access_token.token,
+        access_token_secret: access_token.secret
+      )
+      redirect_to root_path
     else
       begin
-        @user = create_from(provider)
-        reset_session
-        auto_login(@user)
-        redirect_to root_path, notice: "#{provider.titleize}でログインしました"
-      rescue StandardError
-        redirect_to root_path, alert: "#{provider.titleize}でログインできませんでした"
+        fetch_user_data_from(provider)
       end
     end
   end
@@ -28,6 +23,18 @@ class OauthsController < ApplicationController
   private
 
   def auth_params
-    params.permit(:code, :provider, :denied)
+    params.permit(:code, :provider, :oauth_token, :oauth_verifier)
+  end
+
+  def fetch_user_data_from(provider)
+    user_from_provider = build_from(provider)
+    @user = user_from_provider if @user.new_record?
+    @user.build_authentication(uid: @user_hash[:uid],
+                              provider: provider,
+                              access_token: access_token.token,
+                              access_token_secret: access_token.secret)
+    @user.save!
+    reset_session
+    auto_login(@user)
   end
 end
