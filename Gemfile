@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'sorcery'
 gem 'config'
+gem 'attr_encrypted'
 
 group :development, :test do
   # Debugger
