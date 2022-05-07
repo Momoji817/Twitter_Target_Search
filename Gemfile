@@ -35,6 +35,8 @@ group :development, :test do
   # Debugger
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'better_errors'
+  gem 'pry-byebug'
+  gem 'pry-rails'
 
   # Test
   gem 'factory_bot_rails'
