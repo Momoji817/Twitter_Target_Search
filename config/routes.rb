@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   delete 'logout', to: 'user_sessions#destroy'
 
   resources :users, only: %i[show destroy]
+
+  get 'following_candidates', to: 'following_candidates#index'
+  post 'following_candidates', to: 'following_candidates#get_ids'
 end
