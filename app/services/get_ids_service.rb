@@ -10,32 +10,31 @@ class GetIdsService
   TWITTER_API_DOMAIN = "https://api.twitter.com/2"
   TWITTER_CONSUMER_SECRET = Rails.application.credentials.twitter[:secret_key]
 
-  def initialize(user)
-    @user = user
+  def initialize(current_user, username)
+    @user = current_user
+    @username = username
   end
 
-  # :usernameの箇所は別途設定が必要
   def get_ids
-    uri = URI.parse(TWITTER_API_DOMAIN + "/users/by/username/momoji_0817")
+    uri = URI.parse(TWITTER_API_DOMAIN + "/users/by/username/#{@username}")
     request = Net::HTTP::Get.new(uri)
     request.content_type = "application/json"
     request["Authorization"] = authorization_value
-
+  
     options = { use_ssl: true }
-
+  
     response = Net::HTTP.start(uri.hostname, uri.port, options) do |http|
       http.request(request)
     end
-
+  
     puts response.body
   end
 
   private
-  
-  # :usernameの箇所は別途設定が必要
+
   def authorization_value
     authorization_params = create_params.merge(
-      oauth_signature: generate_signature("GET", TWITTER_API_DOMAIN + "/users/by/username/momoji_0817")
+      oauth_signature: generate_signature("GET", TWITTER_API_DOMAIN + "/users/by/username/#{@username}")
     )
     return "OAuth " + authorization_params.sort.to_h.map{|k, v| "#{k}=\"#{v}\"" }.join(",")
   end

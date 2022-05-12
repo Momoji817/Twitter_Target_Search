@@ -12,7 +12,7 @@ class OauthsController < ApplicationController
         access_token: access_token.token,
         access_token_secret: access_token.secret
       )
-      redirect_to root_path
+      redirect_to following_candidates_path
     else
       begin
         fetch_user_data_from(provider)
