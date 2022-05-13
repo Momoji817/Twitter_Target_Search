@@ -30,6 +30,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'sorcery'
 gem 'config'
 gem 'attr_encrypted'
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
 
 group :development, :test do
   # Debugger
