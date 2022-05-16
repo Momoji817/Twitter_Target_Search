@@ -10,12 +10,13 @@ class GetFollowersService
   TWITTER_API_DOMAIN = "https://api.twitter.com/2"
   TWITTER_CONSUMER_SECRET = Rails.application.credentials.twitter[:secret_key]
 
-  def initialize(user)
-    @user = user
+  def initialize(current_user, user_id)
+    @user = current_user
+    @user_id = user_id
   end
 
   def get_followers
-    uri = URI.parse(TWITTER_API_DOMAIN + "/users/#{@user.authentication.uid}/followers")
+    uri = URI.parse(TWITTER_API_DOMAIN + "/users/#{@user_id}/followers")
     request = Net::HTTP::Get.new(uri)
     request.content_type = "application/json"
     request["Authorization"] = authorization_value
@@ -33,7 +34,7 @@ class GetFollowersService
   
   def authorization_value
     authorization_params = create_params.merge(
-      oauth_signature: generate_signature("GET", TWITTER_API_DOMAIN + "/users/#{@user.authentication.uid}/followers")
+      oauth_signature: generate_signature("GET", TWITTER_API_DOMAIN + "/users/#{@user_id}/followers")
     )
     return "OAuth " + authorization_params.sort.to_h.map{|k, v| "#{k}=\"#{v}\"" }.join(",")
   end

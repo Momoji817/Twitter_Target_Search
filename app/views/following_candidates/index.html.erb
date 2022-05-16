@@ -6,21 +6,7 @@
         <%= f.label :username %>
         <%= f.text_field :username %>
       </div>
-      <%= f.button "検索", {controller: 'following_candidates', action: 'get_ids'} %>
-      <h2>フォロワー条件設定</h2>
-      <div class="form-group">
-        <%= f.label :フォロー数 %>
-        <%= f.text_field :フォロー数 %>
-      </div>
-      <div class="form-group">
-        <%= f.label :フォロワー数 %>
-        <%= f.text_field :フォロワー数 %>
-      </div>
-      <div class="form-group">
-        <%= f.label :Twitter開始時期 %>
-        <%= f.text_field :Twitter開始時期 %>
-      </div>
-      <%= f.button "検索" %>
+      <%= f.button "検索", {controller: 'following_candidates'} %>
     <% end %>
   </div>
 </div>

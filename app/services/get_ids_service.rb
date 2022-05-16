@@ -26,8 +26,9 @@ class GetIdsService
     response = Net::HTTP.start(uri.hostname, uri.port, options) do |http|
       http.request(request)
     end
-  
-    puts response.body
+
+    JSON.parse(response.body)["data"]["id"]
+
   end
 
   private
