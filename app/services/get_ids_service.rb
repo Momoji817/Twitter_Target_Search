@@ -26,9 +26,8 @@ class GetIdsService
     response = Net::HTTP.start(uri.hostname, uri.port, options) do |http|
       http.request(request)
     end
-
+    
     JSON.parse(response.body)["data"]["id"]
-
   end
 
   private
@@ -44,7 +43,7 @@ class GetIdsService
   def create_params
     @create_params ||= {
       oauth_consumer_key: Rails.application.credentials.twitter[:key],
-      oauth_nonce: SecureRandom.base64.delete("="),
+      oauth_nonce: SecureRandom.alphanumeric,
       oauth_signature_method: "HMAC-SHA1",
       oauth_timestamp: Time.zone.now.to_i,
       oauth_token: @user.authentication.access_token,

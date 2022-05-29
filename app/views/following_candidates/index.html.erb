@@ -3,8 +3,8 @@
     <%= form_with url: following_candidates_path do |f| %>
       <h1>フォロー候補検索</h1>
       <div class="form-group">
-        <%= f.label :username %>
-        <%= f.text_field :username %>
+        <%= f.label :screen_name %>
+        <%= f.text_field :screen_name %>
       </div>
       <%= f.button "検索", {controller: 'following_candidates'} %>
     <% end %>

@@ -42,7 +42,7 @@ class GetFollowingService
   def create_params
     @create_params ||= {
       oauth_consumer_key: Rails.application.credentials.twitter[:key],
-      oauth_nonce: SecureRandom.base64.delete("="),
+      oauth_nonce: SecureRandom.alphanumeric,
       oauth_signature_method: "HMAC-SHA1",
       oauth_timestamp: Time.zone.now.to_i,
       oauth_token: @user.authentication.access_token,

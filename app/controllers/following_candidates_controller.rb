@@ -1,12 +1,11 @@
 class FollowingCandidatesController < ApplicationController
-  require_relative '../services/get_ids_service'
   require_relative '../services/get_followers_service'
 
   def index; end
 
   def call
-    username = params[:username]
-    user_id = GetIdsService.new(current_user, username).get_ids
-    GetFollowersService.new(current_user, user_id).get_followers
+    screen_name = params[:screen_name]
+    GetFollowersService.new(current_user, screen_name).get_followers
+    render action: :index
   end
 end
