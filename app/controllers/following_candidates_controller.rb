@@ -5,7 +5,7 @@ class FollowingCandidatesController < ApplicationController
 
   def call
     screen_name = params[:screen_name]
-    GetFollowersService.new(current_user, screen_name).get_followers
-    render action: :index
+    @result = GetFollowersService.new(current_user, screen_name).get_followers
+    render :index
   end
 end

@@ -6,7 +6,10 @@
         <%= f.label :screen_name %>
         <%= f.text_field :screen_name %>
       </div>
-      <%= f.button "検索", {controller: 'following_candidates'} %>
+      <%= f.button "検索", { controller: 'following_candidates' } %>
     <% end %>
+    
+    <!-- 検索結果 -->
+    <%= render partial: 'search_results', collection: @result, as: :result %>
   </div>
 </div>

@@ -19,7 +19,7 @@ class GetFollowersService
     screen_name: "#{@screen_name}",
     skip_status: "true",
     include_user_entities: "false",
-    count: 1
+    count: 10
   }
 
   def get_followers
@@ -32,10 +32,11 @@ class GetFollowersService
     
     options = { use_ssl: true }
 
-    res = Net::HTTP.start(uri.hostname, uri.port, options) do |http|
+    response = Net::HTTP.start(uri.hostname, uri.port, options) do |http|
       http.request(request)
     end
-    puts res.body
+    
+    JSON.parse(response.body)
   end
 
   private
