@@ -9,5 +9,4 @@ Rails.application.routes.draw do
   resources :users, only: %i[show destroy]
 
   get 'following_candidates', to: 'following_candidates#index'
-  post 'following_candidates', to: 'following_candidates#call'
 end
