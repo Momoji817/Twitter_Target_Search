@@ -15,16 +15,18 @@ class GetFollowersService
     @screen_name = screen_name
   end
 
-  QUERY_PARAMS = { 
-    screen_name: "#{@screen_name}",
-    skip_status: "true",
-    include_user_entities: "false",
-    count: 10
-  }
-
+  def create_optional_params
+    @create_optional_params ||= {
+      screen_name: "#{@screen_name}",
+      skip_status: "true",
+      include_user_entities: "false",
+      count: 3
+    }
+  end
+  
   def get_followers
     uri = URI.parse(TWITTER_API_DOMAIN + "/followers/list.json")
-    uri.query = URI.encode_www_form(QUERY_PARAMS)
+    uri.query = URI.encode_www_form(create_optional_params)
     
     request = Net::HTTP::Get.new(uri)
     request.content_type = "application/json"
@@ -62,7 +64,7 @@ class GetFollowersService
 
   # oauth_signature以外の認証用情報を生成
   def oauth_values
-    values = create_params.merge(QUERY_PARAMS).sort.to_h.map {|k, v| "#{k}=#{v}" }.join("&")
+    values = create_params.merge(create_optional_params).sort.to_h.map {|k, v| "#{k}=#{v}" }.join("&")
     ERB::Util.url_encode(values)
   end
 
