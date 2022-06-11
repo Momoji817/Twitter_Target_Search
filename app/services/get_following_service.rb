@@ -10,12 +10,20 @@ class GetFollowingService
   TWITTER_API_DOMAIN = "https://api.twitter.com/2"
   TWITTER_CONSUMER_SECRET = Rails.application.credentials.twitter[:secret_key]
 
-  def initialize(user)
-    @user = user
+  def initialize(current_user)
+    @user = current_user
+  end
+
+  def create_optional_params
+    @create_optional_params ||= {
+      max_results: 3
+    }
   end
 
   def get_following
     uri = URI.parse(TWITTER_API_DOMAIN + "/users/#{@user.authentication.uid}/following")
+    uri.query = URI.encode_www_form(create_optional_params)
+    
     request = Net::HTTP::Get.new(uri)
     request.content_type = "application/json"
     request["Authorization"] = authorization_value
@@ -25,8 +33,8 @@ class GetFollowingService
     response = Net::HTTP.start(uri.hostname, uri.port, options) do |http|
       http.request(request)
     end
-
-    puts response.body
+    
+    JSON.parse(response.body)
   end
 
   private
@@ -52,7 +60,7 @@ class GetFollowingService
 
   # oauth_signature以外の認証用情報を生成
   def oauth_values
-    values = create_params.sort.to_h.map {|k, v| "#{k}=#{v}" }.join("&")
+    values = create_params.merge(create_optional_params).sort.to_h.map {|k, v| "#{k}=#{v}" }.join("&")
     ERB::Util.url_encode(values)
   end
 
