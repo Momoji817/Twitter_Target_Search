@@ -20,7 +20,7 @@ class GetFollowersService
       screen_name: "#{@screen_name}",
       skip_status: "true",
       include_user_entities: "false",
-      count: 5
+      count: 3
     }
   end
   
