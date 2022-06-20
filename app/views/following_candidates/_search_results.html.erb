@@ -1,1 +1,18 @@
-<%= @result %>
+
+  <div class="form-group">
+    <%= image_tag(@profile_image_url_https) %>
+    <br>ユーザー名</br>
+      <%= @name %>
+    <br>スクリーンネーム</br>
+      <%= @screen_name %>
+    <br>プロフィール</br>
+      <%= @description %>
+    <br>フォロワー数</br>  
+      <%= @followers_count %>
+    <br>フォロー数</br>
+      <%= @friends_count %>
+    <br>Twitter開始時期</br>
+      <%= @created_at %>
+    <%= button_to "フォロー", {controller: 'following_candidates', action: 'following', target_user_id: @target_user_id}, {method: :post, name: 'following'} %>
+  </div>
+  

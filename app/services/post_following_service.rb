@@ -6,33 +6,22 @@ require 'base64'
 require 'openssl'
 require 'erb'
 
-class GetFollowingService
+class PostFollowingService
   TWITTER_API_DOMAIN = "https://api.twitter.com/2"
   TWITTER_CONSUMER_SECRET = Rails.application.credentials.twitter[:secret_key]
 
-  def initialize(current_user)
+  def initialize(current_user, target_user_id)
     @user = current_user
-    @next_token = nil
+    @target_user_id = target_user_id
   end
 
-  def create_optional_params
-    @create_optional_params ||= {
-      max_results: 10
-    }
-    if @next_token.blank?
-      @create_optional_params
-    else
-      next_token = {pagination_token: @next_token} 
-      @create_optional_params.merge!(next_token)
-    end
-  end
-
-  def request
+  def post_following
     uri = URI.parse(TWITTER_API_DOMAIN + "/users/#{@user.authentication.uid}/following")
-    uri.query = URI.encode_www_form(create_optional_params)
+    request_body_hash = { target_user_id: @target_user_id }
     
-    request = Net::HTTP::Get.new(uri)
+    request = Net::HTTP::Post.new(uri)
     request.content_type = "application/json"
+    request.body = JSON.generate(request_body_hash)
     request["Authorization"] = authorization_value
 
     options = { use_ssl: true }
@@ -42,27 +31,14 @@ class GetFollowingService
     end
     
     JSON.parse(response.body)
+    binding.pry
   end
-
-  def get_following
-    @following = request.flatten.flatten
-    @following_next_token = @following.last
-    
-    while @following_next_token["next_token"].present? do
-      @next_token = @following_next_token["next_token"]
-      next_request = request
-      @following.pop
-      @following = @following + next_request.flatten
-      @following_next_token = @following.last
-    end
-    @following.flatten.map{|x| x["id"]}.compact
-  end
-
+  
   private
   
   def authorization_value
     authorization_params = create_params.merge(
-      oauth_signature: generate_signature("GET", TWITTER_API_DOMAIN + "/users/#{@user.authentication.uid}/following")
+      oauth_signature: generate_signature("POST", TWITTER_API_DOMAIN + "/users/#{@user.authentication.uid}/following")
     )
     return "OAuth " + authorization_params.sort.to_h.map{|k, v| "#{k}=\"#{v}\"" }.join(",")
   end
@@ -81,7 +57,7 @@ class GetFollowingService
 
   # oauth_signature以外の認証用情報を生成
   def oauth_values
-    values = create_params.merge(create_optional_params).sort.to_h.map {|k, v| "#{k}=#{v}" }.join("&")
+    values = create_params.sort.to_h.map {|k, v| "#{k}=#{v}" }.join("&")
     ERB::Util.url_encode(values)
   end
 
