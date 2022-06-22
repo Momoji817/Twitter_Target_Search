@@ -1,18 +1,18 @@
-
-  <div class="form-group">
-    <%= image_tag(@profile_image_url_https) %>
+<div class="form-group">
+  <% @results.each do |x| %>
+    <%= image_tag(x["profile_image_url_https"]) %>
     <br>ユーザー名</br>
-      <%= @name %>
+      <%= x["name"] %>
     <br>スクリーンネーム</br>
-      <%= @screen_name %>
+      <%= x["screen_name"] %>
     <br>プロフィール</br>
-      <%= @description %>
+      <%= x["description"] %>
     <br>フォロワー数</br>  
-      <%= @followers_count %>
+      <%= x["followers_count"] %>
     <br>フォロー数</br>
-      <%= @friends_count %>
+      <%= x["friends_count"] %>
     <br>Twitter開始時期</br>
-      <%= @created_at %>
-    <%= button_to "フォロー", {controller: 'following_candidates', action: 'following', target_user_id: @target_user_id}, {method: :post, name: 'following'} %>
-  </div>
-  
+      <%= x["created_at"] %>
+    <%= button_to "フォロー", {controller: 'following_candidates', action: 'following', target_user_id: x["id"]}, {method: :post, name: 'following'} %>
+  <% end %>
+</div>
