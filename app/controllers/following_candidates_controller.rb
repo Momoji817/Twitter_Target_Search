@@ -17,7 +17,7 @@ class FollowingCandidatesController < ApplicationController
       @followers = GetFollowersService.new(current_user, screen_name).get_followers.delete("users")
       @followers.reject!{|x| x["id_str"].in?(@following)}
 
-      @result = @followers.find_all{
+      @results = @followers.find_all{
         |x| x["followers_count"].to_i >= followers_count_over.to_i && 
             x["followers_count"].to_i <= followers_count_less.to_i && 
             x["friends_count"].to_i >= friends_count_over.to_i && 
@@ -25,24 +25,15 @@ class FollowingCandidatesController < ApplicationController
             x["created_at"] >= created_at && 
             x["description"].include?(keyword)
       }
-      
-      @result.map do |x|
-        @name = x["name"]
-        @screen_name = x["screen_name"]
-        @description = x["description"]
-        @followers_count = x["followers_count"]
-        @friends_count = x["friends_count"]
-        @created_at = x["created_at"]
-        @profile_image_url_https = x["profile_image_url_https"]
-        @target_user_id = x["id"]
-      end
     end
   end
 
   def following
     if params[:following].present?
       target_user_id = params[:target_user_id]
+      binding.pry
       @following_result = PostFollowingService.new(current_user, target_user_id).post_following
+    binding.pry
     end
   end
 end

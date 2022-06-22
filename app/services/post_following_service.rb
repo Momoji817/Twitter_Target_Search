@@ -31,7 +31,6 @@ class PostFollowingService
     end
     
     JSON.parse(response.body)
-    binding.pry
   end
   
   private

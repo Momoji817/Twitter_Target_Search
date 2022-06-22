@@ -5,17 +5,17 @@
       <div class="form-group">
         <h2>検索条件</h2>
           <br>twitter_id</br>
-            <%= f.text_field :screen_name %>
+            <%= f.text_field :screen_name, value: params[:screen_name] %>
           <br>フォロワー数(以上/以下)</br>
-            <%= f.number_field :followers_count_over %>
-            <%= f.number_field :followers_count_less %>
+            <%= f.number_field :followers_count_over, value: params[:followers_count_over] %>
+            <%= f.number_field :followers_count_less, value: params[:followers_count_less] %>
           <br>フォロー数(以上/以下)</br>
-            <%= f.number_field :friends_count_over %>
-            <%= f.number_field :friends_count_less %>
+            <%= f.number_field :friends_count_over, value: params[:friends_count_over] %>
+            <%= f.number_field :friends_count_less, value: params[:friends_count_less] %>
           <br>Twitter開始時期（指定した日時以降に作成されたアカウントを抽出）</br>
-            <%= f.datetime_field :created_at %>
+            <%= f.datetime_field :created_at, value: params[:created_at] %>
           <br>自己紹介のキーワード検索</br>
-            <%= f.text_field :keyword %>
+            <%= f.text_field :keyword, value: params[:keyword] %>
       </div>
       <br><%= f.submit "検索", name: "search" %></br>
     <% end %>
@@ -25,7 +25,7 @@
 <div class= "container">
   <div class="row">
     <h2>検索結果</h2>
-    <% if @result.present? %>
+    <% if @results.present? %>
       <%= render partial: 'search_results' %>
     <% end %>
   </div>
