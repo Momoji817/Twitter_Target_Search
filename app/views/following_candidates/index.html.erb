@@ -1,32 +1,52 @@
-<div class= "container">
-  <div class="row">
-    <%= form_with url: following_candidates_path, method: :get do |f| %>
-      <h1>フォロー候補検索</h1>
+<header class="header">
+  <div class="header-inner">
+    <div class="mt-1 mb-1 mx-1">
+      <div class="container">
+        <div class="row justify-content-md-center">
+          <div class="col col-lg-10">
+            <%= link_to root_path do %>
+              <%= image_tag "follotter_icon.png", class: "icon-top" %>
+            <% end %>
+          </div>
+          <div class="col-auto">
+            <%= image_tag("#{current_user.profile_image_url}") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="container-fluid">
+    <div class="top-wrapper">
+      <%= form_with url: following_candidates_path, method: :get do |f| %>
+      <h1>ターゲット候補検索</h1>
       <div class="form-group">
-        <h2>検索条件</h2>
-          <br>twitter_id</br>
+          <br>検索したいインフルエンサーのTwitter_id（必須）</br>
             <%= f.text_field :screen_name, value: params[:screen_name] %>
-          <br>フォロワー数(以上/以下)</br>
+          <h3>フォロワー条件設定</h3>
+          <br>フォロワー数(以上/以下)（任意）</br>
             <%= f.number_field :followers_count_over, value: params[:followers_count_over] %>
             <%= f.number_field :followers_count_less, value: params[:followers_count_less] %>
-          <br>フォロー数(以上/以下)</br>
+          <br>フォロー数(以上/以下)（任意）</br>
             <%= f.number_field :friends_count_over, value: params[:friends_count_over] %>
             <%= f.number_field :friends_count_less, value: params[:friends_count_less] %>
-          <br>Twitter開始時期（指定した日時以降に作成されたアカウントを抽出）</br>
+          <br>Twitter開始時期（指定の日時以降に作成されたアカウントを抽出します）（任意）</br>
             <%= f.datetime_field :created_at, value: params[:created_at] %>
-          <br>自己紹介のキーワード検索</br>
+          <br>自己紹介のキーワード検索（該当キーワードを自己紹介内に持つアカウントを抽出します）（任意）</br>
             <%= f.text_field :keyword, value: params[:keyword] %>
       </div>
-      <br><%= f.submit "検索", name: "search" %></br>
+      <br><%= f.submit "検索", name: "search", class: "button btn btn-dark text-white" %></br>
+      <br><%= f.submit "次の検索へ", name: "next_search", class: "button btn btn-dark text-white" %></br>
     <% end %>
+    <div class= "container">
+      <div class="row">
+        <h2>検索結果</h2>
+        <% if @results.present? %>
+          <%= render partial: 'search_results' %>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
-
-<div class= "container">
-  <div class="row">
-    <h2>検索結果</h2>
-    <% if @results.present? %>
-      <%= render partial: 'search_results' %>
-    <% end %>
-  </div>
-</div>
+</main>

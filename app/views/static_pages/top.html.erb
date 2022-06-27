@@ -1,8 +1,38 @@
-<div class= "container">
-  <div class="row">
-    <h1>Twitterターゲット特定支援サービス（仮）</h1>
-    <p>About</p>
-    <p>Aboutの説明</p>
-    <%= link_to 'Login with Twitter', auth_at_provider_path(provider: :twitter) %>
+<header class="header">
+  <div class="header-inner">
+    <div class="mt-1 mb-1 mx-1">
+      <div class="container">
+        <div class="row">
+          <div class="col col-lg-8">
+            <%= link_to root_path do %>
+              <%= image_tag "follotter_icon.png", class: "icon-top" %>
+            <% end %>
+          </div>
+          <div class="col-auto">
+            <%= link_to 'お問い合せ', '#', class: "inquiry-link" %>
+          </div>
+          <div class="col-auto">
+            <%= link_to '始める', auth_at_provider_path(provider: :twitter), class: "button btn btn-dark text-white" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</header>
+
+<main class="main">
+  <div class="container-fluid">
+    <div class="top-wrapper">
+        <ul class="list-group">
+          <h1>○○ができます</h1>
+          <li>インフルエンサーのフォロワーをお好みで抽出できます</li>
+          <li>インフルエンサーのフォロワーをお好みで抽出できます</li>
+          <li>インフルエンサーのフォロワーをお好みで抽出できます</li>
+        </ul>
+      </div>
+    </div>
+    <div class="start-button">
+        <%= link_to '今すぐ始める', auth_at_provider_path(provider: :twitter), class: "top-button btn btn-dark btn-lg text-white" %>
+    </div>
+  </div>
+</main>
