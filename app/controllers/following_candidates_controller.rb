@@ -12,9 +12,12 @@ class FollowingCandidatesController < ApplicationController
       friends_count_less = params[:friends_count_less].presence || 1000000000
       created_at = params[:created_at].presence || "1000-01-03 01:10:00 +0900"
       keyword = params[:keyword]
-      
+      next_cursor = params[:next_cursor]
+
       @following = GetFollowingService.new(current_user).get_following
-      @followers = GetFollowersService.new(current_user, screen_name).get_followers.delete("users")
+      @followers_result = GetFollowersService.new(current_user, screen_name, next_cursor).get_followers
+      @next_cursor = @followers_result["next_cursor"]
+      @followers = @followers_result["users"]
       @followers.reject!{|x| x["id_str"].in?(@following)}
 
       @results = @followers.find_all{
@@ -31,9 +34,7 @@ class FollowingCandidatesController < ApplicationController
   def following
     if params[:following].present?
       target_user_id = params[:target_user_id]
-      binding.pry
       @following_result = PostFollowingService.new(current_user, target_user_id).post_following
-    binding.pry
     end
   end
 end

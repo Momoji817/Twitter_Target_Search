@@ -36,9 +36,9 @@
             <%= f.datetime_field :created_at, value: params[:created_at] %>
           <br>自己紹介のキーワード検索（該当キーワードを自己紹介内に持つアカウントを抽出します）（任意）</br>
             <%= f.text_field :keyword, value: params[:keyword] %>
+            <%= f.hidden_field :next_cursor, value: @next_cursor %>
       </div>
       <br><%= f.submit "検索", name: "search", class: "button btn btn-dark text-white" %></br>
-      <br><%= f.submit "次の検索へ", name: "next_search", class: "button btn btn-dark text-white" %></br>
     <% end %>
     <div class= "container">
       <div class="row">
