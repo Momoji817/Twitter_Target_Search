@@ -10,9 +10,10 @@ class GetFollowersService
   TWITTER_API_DOMAIN = "https://api.twitter.com/1.1"
   TWITTER_CONSUMER_SECRET = Rails.application.credentials.twitter[:secret_key]
   
-  def initialize(current_user, screen_name)
+  def initialize(current_user, screen_name, next_cursor)
     @user = current_user
     @screen_name = screen_name
+    @next_cursor = next_cursor
   end
 
   def create_optional_params
@@ -22,6 +23,12 @@ class GetFollowersService
       include_user_entities: "false",
       count: 3
     }
+    if @next_cursor.blank?
+      @create_optional_params
+    else
+      next_cursor = {cursor: @next_cursor} 
+      @create_optional_params.merge!(next_cursor)
+    end
   end
   
   def get_followers
