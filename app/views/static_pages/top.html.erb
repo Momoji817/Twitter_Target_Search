@@ -5,14 +5,14 @@
         <div class="row">
           <div class="col col-lg-8">
             <%= link_to root_path do %>
-              <%= image_tag "follotter_icon.png", class: "icon-top" %>
+              <%= image_tag "follotter_icon.png", class: "follotter_icon" %>
             <% end %>
           </div>
           <div class="col-auto">
-            <%= link_to 'お問い合せ', '#', class: "inquiry-link" %>
+            <%= link_to 'お問い合わせ', '#', class: "inquiry-link" %>
           </div>
           <div class="col-auto">
-            <%= link_to '始める', auth_at_provider_path(provider: :twitter), class: "button btn btn-dark text-white" %>
+            <%= link_to '始める', auth_at_provider_path(provider: :twitter), class: "button btn btn-dark text-white fw-bold" %>
           </div>
         </div>
       </div>
@@ -21,18 +21,73 @@
 </header>
 
 <main class="main">
-  <div class="container-fluid">
-    <div class="top-wrapper">
-        <ul class="list-group">
-          <h1>○○ができます</h1>
-          <li>インフルエンサーのフォロワーをお好みで抽出できます</li>
-          <li>インフルエンサーのフォロワーをお好みで抽出できます</li>
-          <li>インフルエンサーのフォロワーをお好みで抽出できます</li>
-        </ul>
+  <div class="wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mt-5">
+          <h1>Twitterのターゲット探しに時間を奪われる毎日から開放します！</h1>
+          <ul class="list-group h5">
+            <li>インフルエンサーのフォロワーを、お好みの条件で抽出できます</li>
+            <li>未フォローのアカウントだけを抽出！<br>あなたのターゲットがすぐに見つかります</li>
+            <li>抽出したターゲットをその場で即フォローできます</li>
+          </ul>
+          <div class="start-button">
+            <%= link_to '今すぐ始める', auth_at_provider_path(provider: :twitter), class: "top-button btn btn-dark btn-lg text-white fw-bold" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <%= image_tag 'top_icon', class: "img-fluid" %>
+        </div>
       </div>
     </div>
-    <div class="start-button">
-        <%= link_to '今すぐ始める', auth_at_provider_path(provider: :twitter), class: "top-button btn btn-dark btn-lg text-white" %>
+    
+    <div class="container mt-5 pt-5">
+      <h2>利用手順</h2>
+      <div class="row mt-5">
+        <div class="col-md-6 mt-1">
+          <h4>STEP1</h4>
+          <h4>ターゲットがいそうなインフルエンサーを決める</h4><br>
+          <h6>あなたのターゲットは、インフルエンサーのフォロワーの中にいます。</h6>
+        </div>
+        <div class="col-md-6 text-center">
+          <%= image_tag 'how_to_1', class: "how-to-icon" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mt-1">
+          <h4>STEP2</h4>
+            <h4>ターゲットの属性を表す抽出条件を決める</h4><br>
+            <p class="top-text">
+              フォロワー数、Twitter開始時期、自己紹介に入っているキーワードなど、あなたのターゲットの属性を表す抽出条件を自由に選べます。
+            </p>
+          </ul>
+        </div>
+        <div class="col-md-6 text-center">
+          <%= image_tag 'how_to_2', class: "how-to-icon" %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mt-1">
+          <h4>STEP3</h4>
+            <h4>ターゲットをその場でフォローする</h4><br>
+            <div class="top-text">
+              フォロー済みのアカウントは自動的に除外されるので、余分な情報に惑わされる心配なし！<br>
+              あなたがフォローすべきアカウントだけに集中できます。
+            </div>
+          </ul>
+        </div>
+        <div class="col-md-6 text-center">
+          <%= image_tag 'how_to_3', class: "how-to-icon" %>
+        </div>
+      </div>
     </div>
+
+    <div class="container mt-1 mb-5 pb-5">
+      <div class="start-button text-center">
+        <%= link_to '今すぐ無料で始める', auth_at_provider_path(provider: :twitter), class: "top-button btn btn-dark btn-lg text-white fw-bold" %>
+      </div>
+    </div>  
   </div>
 </main>

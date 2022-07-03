@@ -10,7 +10,7 @@ class FollowingCandidatesController < ApplicationController
       followers_count_less = params[:followers_count_less].presence || 1000000000
       friends_count_over = params[:friends_count_over]
       friends_count_less = params[:friends_count_less].presence || 1000000000
-      created_at = params[:created_at].presence || "1000-01-03 01:10:00 +0900"
+      created_at = params[:created_at].presence || "1000-01-03 01:10:00 +0000"
       keyword = params[:keyword]
       next_cursor = params[:next_cursor]
 
@@ -19,13 +19,12 @@ class FollowingCandidatesController < ApplicationController
       @next_cursor = @followers_result["next_cursor"]
       @followers = @followers_result["users"]
       @followers.reject!{|x| x["id_str"].in?(@following)}
-
       @results = @followers.find_all{
         |x| x["followers_count"].to_i >= followers_count_over.to_i && 
             x["followers_count"].to_i <= followers_count_less.to_i && 
             x["friends_count"].to_i >= friends_count_over.to_i && 
             x["friends_count"].to_i <= friends_count_less.to_i && 
-            x["created_at"] >= created_at && 
+            x["created_at"].in_time_zone('Tokyo').strftime('%Y/%m/%d') >= created_at && 
             x["description"].include?(keyword)
       }
     end
