@@ -2,14 +2,15 @@
   <div class="header-inner">
     <div class="mt-1 mb-1 mx-1">
       <div class="container">
-        <div class="row justify-content-md-center">
-          <div class="col col-lg-10">
+        <div class="row">
+          <div class="col col-lg-8">
             <%= link_to root_path do %>
-              <%= image_tag "follotter_icon.png", class: "icon-top" %>
+              <%= image_tag "follotter_icon.png", class: "follotter_icon" %>
             <% end %>
           </div>
           <div class="col-auto">
-            <%= image_tag("#{current_user.profile_image_url}") %>
+            <%= image_tag("#{current_user.profile_image_url}", class: 'rounded-circle mr15') %>
+            <%= current_user.name %>
           </div>
         </div>
       </div>
@@ -18,35 +19,49 @@
 </header>
 
 <main class="main">
-  <div class="container-fluid">
-    <div class="top-wrapper">
-      <%= form_with url: following_candidates_path, method: :get do |f| %>
-      <h1>ターゲット候補検索</h1>
-      <div class="form-group">
-          <br>検索したいインフルエンサーのTwitter_id（必須）</br>
-            <%= f.text_field :screen_name, value: params[:screen_name] %>
-          <h3>フォロワー条件設定</h3>
-          <br>フォロワー数(以上/以下)（任意）</br>
-            <%= f.number_field :followers_count_over, value: params[:followers_count_over] %>
-            <%= f.number_field :followers_count_less, value: params[:followers_count_less] %>
-          <br>フォロー数(以上/以下)（任意）</br>
-            <%= f.number_field :friends_count_over, value: params[:friends_count_over] %>
-            <%= f.number_field :friends_count_less, value: params[:friends_count_less] %>
-          <br>Twitter開始時期（指定の日時以降に作成されたアカウントを抽出します）（任意）</br>
-            <%= f.datetime_field :created_at, value: params[:created_at] %>
-          <br>自己紹介のキーワード検索（該当キーワードを自己紹介内に持つアカウントを抽出します）（任意）</br>
-            <%= f.text_field :keyword, value: params[:keyword] %>
+  <div class="wrapper">
+    <div class="container">
+      <h4>ターゲット検索条件</h4>
+      <div class="col-md-10 mt-3 mb-5">
+        <%= form_with url: following_candidates_path, method: :get do |f| %>
+          <div class="form-group">
+            <h6><%= f.label :screen_name, "■検索するインフルエンサーのTwitter_id" %></h6>
+            <p>@<%= f.text_field :screen_name, value: params[:screen_name], size: 15 %><span style="color:red"><sup>＊必須</sup></span><p><br>
+          </div>
+          <h6>■インフルエンサーのフォロワー抽出条件</h6>
+          <div class="form-group">
+            <%= f.label :followers_count_over, "フォロワー数" %><br>
+            <%= f.number_field :followers_count_over, value: params[:followers_count_over], size: 15 %>以上
+            <%= f.number_field :followers_count_less, value: params[:followers_count_less], size: 15 %>以下<br>
+          </div>
+          <div class="form-group">
+            <%= f.label :friends_count_over, "フォロー数" %><br>
+            <%= f.number_field :friends_count_over, value: params[:friends_count_over], size: 15 %>以上
+            <%= f.number_field :friends_count_less, value: params[:friends_count_less], size: 15 %>以下<br>
+          </div>
+          <div class="form-group">
+            <%= f.label :created_at, "Twitter開始時期" %><br>
+            <%= f.date_field :created_at, value: params[:created_at] %><br>
+          </div>
+          <div class="form-group">
+            <%= f.label :keyword, "自己紹介に入っているキーワード" %><br>
+            <%= f.text_field :keyword, value: params[:keyword], size: 15 %>
             <%= f.hidden_field :next_cursor, value: @next_cursor %>
-      </div>
-      <br><%= f.submit "検索", name: "search", class: "button btn btn-dark text-white" %></br>
-    <% end %>
-    <div class= "container">
-      <div class="row">
-        <h2>検索結果</h2>
-        <% if @results.present? %>
-          <%= render partial: 'search_results' %>
+          </div>
+          <div class="form-group">
+            <br><%= f.submit " 検索する ", name: "search", class: "button btn btn-dark text-white fw-bold" %><br><br>
+          </div>
+          <div class="form-group">
+            <% if @results.present? %>
+            <h3>検索結果</h3>            
+              <%= render partial: 'search_results' %>
+              <%= f.submit " 同じ条件でターゲットをもっと探す ", name: "search", class: "button btn btn-dark text-white fw-bold mx-auto d-block" %><br><br>
+            <% end %>
+          </div>
         <% end %>
       </div>
-    </div>
+    </div>  
+        
+    
   </div>
 </main>

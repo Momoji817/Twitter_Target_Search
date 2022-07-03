@@ -1,18 +1,16 @@
-<div class="form-group">
+<div class="container mb-5">
   <% @results.each do |x| %>
-    <%= image_tag(x["profile_image_url_https"]) %>
-    <br>ユーザー名</br>
-      <%= x["name"] %>
-    <br>スクリーンネーム</br>
-      <%= x["screen_name"] %>
-    <br>プロフィール</br>
-      <%= x["description"] %>
-    <br>フォロワー数</br>  
-      <%= x["followers_count"] %>
-    <br>フォロー数</br>
-      <%= x["friends_count"] %>
-    <br>Twitter開始時期</br>
-      <%= x["created_at"] %>
-    <%= button_to "フォロー", {controller: 'following_candidates', action: 'following', target_user_id: x["id"]}, {method: :post, name: 'following'} %>
+    <div class="card">
+      <div class="card-body">
+        <%= image_tag(x["profile_image_url_https"], class: 'rounded-circle mr15') %>
+        <h5><%= x["name"] %></h5>
+        <h6><div class="text-secondary">@<%= x["screen_name"] %></div></h6>
+        <h6><%= x["description"] %></h6> 
+        <%= x["followers_count"] %><span class="results_text">フォロワー</span>
+        <%= x["friends_count"] %><span class="results_text">フォロー</span><br>
+        <%= x["created_at"].in_time_zone('Tokyo').strftime('%Y年%m月') %><span class="results_text">開始</span><br><br>
+        <%= button_to " フォロー ", {controller: 'following_candidates', action: 'following', target_user_id: x["id"], method: :post, name: 'following'}, class: "button btn btn-dark text-white fw-bold" %>
+      </div>
+    </div>
   <% end %>
 </div>

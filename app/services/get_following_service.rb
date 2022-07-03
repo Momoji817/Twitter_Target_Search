@@ -17,7 +17,7 @@ class GetFollowingService
 
   def create_optional_params
     @create_optional_params ||= {
-      max_results: 10
+      max_results: 1000
     }
     if @next_token.blank?
       @create_optional_params
