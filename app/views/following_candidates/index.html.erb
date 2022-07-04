@@ -51,17 +51,31 @@
           <div class="form-group">
             <br><%= f.submit " 検索する ", name: "search", class: "button btn btn-dark text-white fw-bold" %><br><br>
           </div>
-          <div class="form-group">
-            <% if @results.present? %>
-            <h3>検索結果</h3>            
-              <%= render partial: 'search_results' %>
-              <%= f.submit " 同じ条件でターゲットをもっと探す ", name: "search", class: "button btn btn-dark text-white fw-bold mx-auto d-block" %><br><br>
-            <% end %>
-          </div>
+        <% end %>
+
+        <% if @results.present? %>
+          <h3>検索結果</h3>         
+            <div class="container mb-5">
+              <% @results.each do |x| %>
+                <div class="card">
+                  <div class="card-body">
+                    <%= image_tag(x["profile_image_url_https"], class: 'rounded-circle mr15') %>
+                    <h5><%= x["name"] %></h5>
+                    <h6><div class="text-secondary">@<%= x["screen_name"] %></div></h6>
+                    <h6><%= x["description"] %></h6> 
+                    <%= x["followers_count"] %><span class="results_text">フォロワー</span>
+                    <%= x["friends_count"] %><span class="results_text">フォロー</span><br>
+                    <%= x["created_at"].in_time_zone('Tokyo').strftime('%Y年%m月') %><span class="results_text">開始</span><br><br>
+                    <%= button_to " フォロー ", 
+                        {controller: 'following_candidates', action: 'following', target_user_id: x["id"]}, 
+                        {method: :post, name: 'following', id: "following-button-#{x["id"]}", remote: true, class: "button btn btn-dark text-white fw-bold"} 
+                    %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
         <% end %>
       </div>
-    </div>  
-        
-    
+    </div>
   </div>
 </main>
