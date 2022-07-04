@@ -62,9 +62,9 @@
                     <%= image_tag(x["profile_image_url_https"], class: 'rounded-circle mr15') %>
                     <h5><%= x["name"] %></h5>
                     <h6><div class="text-secondary">@<%= x["screen_name"] %></div></h6>
-                    <h6><%= x["description"] %></h6> 
-                    <%= x["followers_count"] %><span class="results_text">フォロワー</span>
-                    <%= x["friends_count"] %><span class="results_text">フォロー</span><br>
+                    <h6><%= x["description"] %></h6>
+                    <%= x["friends_count"] %><span class="results_text">フォロー　</span>
+                    <%= x["followers_count"] %><span class="results_text">フォロワー</span><br>
                     <%= x["created_at"].in_time_zone('Tokyo').strftime('%Y年%m月') %><span class="results_text">開始</span><br><br>
                     <%= button_to " フォロー ", 
                         {controller: 'following_candidates', action: 'following', target_user_id: x["id"]}, 
