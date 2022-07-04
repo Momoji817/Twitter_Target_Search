@@ -55,25 +55,30 @@
 
         <% if @results.present? %>
           <h3>検索結果</h3>         
-            <div class="container mb-5">
-              <% @results.each do |x| %>
-                <div class="card">
-                  <div class="card-body">
-                    <%= image_tag(x["profile_image_url_https"], class: 'rounded-circle mr15') %>
-                    <h5><%= x["name"] %></h5>
-                    <h6><div class="text-secondary">@<%= x["screen_name"] %></div></h6>
-                    <h6><%= x["description"] %></h6>
-                    <%= x["friends_count"] %><span class="results_text">フォロー　</span>
-                    <%= x["followers_count"] %><span class="results_text">フォロワー</span><br>
-                    <%= x["created_at"].in_time_zone('Tokyo').strftime('%Y年%m月') %><span class="results_text">開始</span><br><br>
-                    <%= button_to " フォロー ", 
-                        {controller: 'following_candidates', action: 'following', target_user_id: x["id"]}, 
-                        {method: :post, name: 'following', id: "following-button-#{x["id"]}", remote: true, class: "button btn btn-dark text-white fw-bold"} 
-                    %>
-                  </div>
+          <div class="container mb-5">
+            <% @results.each do |x| %>
+              <div class="card">
+                <div class="card-body">
+                  <%= image_tag(x["profile_image_url_https"], class: 'rounded-circle mr15') %>
+                  <h5><%= x["name"] %></h5>
+                  <h6><div class="text-secondary">@<%= x["screen_name"] %></div></h6>
+                  <h6><%= x["description"] %></h6>
+                  <%= x["friends_count"] %><span class="results_text">フォロー　</span>
+                  <%= x["followers_count"] %><span class="results_text">フォロワー</span><br>
+                  <%= x["created_at"].in_time_zone('Tokyo').strftime('%Y年%m月') %><span class="results_text">開始</span><br><br>
+                  <%= button_to " フォロー ", 
+                      {controller: 'following_candidates', action: 'following', target_user_id: x["id"]}, 
+                      {method: :post, name: 'following', id: "following-button-#{x["id"]}", remote: true, class: "button btn btn-dark text-white fw-bold"} %>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <% if @results == [] %>
+          <h3>検索結果</h3>
+          <div class="container mb-5">
+            <p>該当するターゲットが見つかりませんでした。</p>
+          </div>
         <% end %>
       </div>
     </div>
