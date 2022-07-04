@@ -19,13 +19,15 @@ class FollowingCandidatesController < ApplicationController
       @next_cursor = @followers_result["next_cursor"]
       @followers = @followers_result["users"]
       @followers.reject!{|x| x["id_str"].in?(@following)}
+      @followers.reject!{|x| x["protected"]}
+      
       @results = @followers.find_all{
         |x| x["followers_count"].to_i >= followers_count_over.to_i && 
             x["followers_count"].to_i <= followers_count_less.to_i && 
             x["friends_count"].to_i >= friends_count_over.to_i && 
             x["friends_count"].to_i <= friends_count_less.to_i && 
             x["created_at"].in_time_zone('Tokyo').strftime('%Y/%m/%d') >= created_at && 
-            x["description"].include?(keyword)
+            x["description"].include?(keyword) 
       }
     end
   end
@@ -34,6 +36,7 @@ class FollowingCandidatesController < ApplicationController
     if params[:following].present?
       target_user_id = params[:target_user_id]
       @following_result = PostFollowingService.new(current_user, target_user_id).post_following
+      @target_user_id = target_user_id
     end
   end
 end
