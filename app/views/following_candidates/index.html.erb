@@ -31,12 +31,12 @@
           <h6>■インフルエンサーのフォロワー抽出条件</h6>
           <div class="form-group">
             <%= f.label :followers_count_over, "フォロワー数" %><br>
-            <%= f.number_field :followers_count_over, value: params[:followers_count_over], size: 15 %>以上
+            <%= f.number_field :followers_count_over, value: params[:followers_count_over], size: 15, min: 0 %>以上
             <%= f.number_field :followers_count_less, value: params[:followers_count_less], size: 15 %>以下<br>
           </div>
           <div class="form-group">
             <%= f.label :friends_count_over, "フォロー数" %><br>
-            <%= f.number_field :friends_count_over, value: params[:friends_count_over], size: 15 %>以上
+            <%= f.number_field :friends_count_over, value: params[:friends_count_over], size: 15, min: 0 %>以上
             <%= f.number_field :friends_count_less, value: params[:friends_count_less], size: 15 %>以下<br>
           </div>
           <div class="form-group">
