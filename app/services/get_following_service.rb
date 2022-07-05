@@ -47,6 +47,10 @@ class GetFollowingService
   def get_following
     @following = request.flatten.flatten
     @following_next_token = @following.last
+
+    if @following_next_token == 429
+      return "error"
+    end
     
     while @following_next_token["next_token"].present? do
       @next_token = @following_next_token["next_token"]
@@ -54,6 +58,10 @@ class GetFollowingService
       @following.pop
       @following = @following + next_request.flatten
       @following_next_token = @following.last
+
+      if @following_next_token == 429
+        return "error"
+      end
     end
     @following.flatten.map{|x| x["id"]}.compact
   end

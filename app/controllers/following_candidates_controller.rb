@@ -15,6 +15,11 @@ class FollowingCandidatesController < ApplicationController
       next_cursor = params[:next_cursor]
 
       @following = GetFollowingService.new(current_user).get_following
+
+      if @following == "error"
+        return @results = "error"
+      end
+
       @followers_result = GetFollowersService.new(current_user, screen_name, next_cursor).get_followers
       @next_cursor = @followers_result["next_cursor"]
       @followers = @followers_result["users"]
