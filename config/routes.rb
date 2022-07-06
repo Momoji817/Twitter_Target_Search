@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
+  get '/terms', to: 'static_pages#terms'
+  get '/privacy', to: 'static_pages#privacy'
+  get '/info', to: 'static_pages#info'
   
   post 'oauth/callback', to: 'oauths#callback'
   get 'oauth/callback', to: 'oauths#callback'
