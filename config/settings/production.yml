@@ -1,2 +1,2 @@
 twitter:
-  callback_url: "https://follotter.herokuapp.com/oauth/callback?provider=twitter"
+  callback_url: "https://www.follotter-app.com/oauth/callback?provider=twitter"
