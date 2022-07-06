@@ -10,6 +10,10 @@
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag('favicon.ico') %>
+  
+    <% if Rails.env.production? %>
+      <%= render 'google_analytics' %>
+    <% end %>
   </head>
 
   <body>
