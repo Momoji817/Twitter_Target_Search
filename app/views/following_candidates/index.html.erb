@@ -65,7 +65,7 @@
               <div class="card">
                 <div class="card-body">
                   <%= image_tag(x["profile_image_url_https"], class: 'rounded-circle mr15') %>
-                  <h5><%= x["name"] %></h5>
+                  <h5><%= link_to "#{x["name"]}", "https://twitter.com/#{x["screen_name"]}", class: "name" %></h5>
                   <h6><div class="text-secondary">@<%= x["screen_name"] %></div></h6>
                   <h6><%= x["description"] %></h6>
                   <%= x["friends_count"] %><span class="results_text">フォロー　</span>
