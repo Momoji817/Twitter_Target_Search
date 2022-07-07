@@ -56,7 +56,7 @@
         <% if @results == "too_many_requests" %>
           <h3>検索結果</h3>
           <div class="container mb-5">
-            <p>エラーが発生しております。しばらく時間を置いてから再度お試しください。</p>
+            <p>Twitterと通信を行うAPIの呼び出し回数制限を超えました。<br>しばらくしてから再度お試しください。</p>
           </div>
         <% elsif @results == "screen_name_error" %>
           <h3>検索結果</h3>
