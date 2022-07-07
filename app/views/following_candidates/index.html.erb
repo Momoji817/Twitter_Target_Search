@@ -53,10 +53,15 @@
           </div>
         <% end %>
 
-        <% if @results == "error" %>
+        <% if @results == "too_many_requests" %>
           <h3>検索結果</h3>
           <div class="container mb-5">
             <p>エラーが発生しております。しばらく時間を置いてから再度お試しください。</p>
+          </div>
+        <% elsif @results == "screen_name_error" %>
+          <h3>検索結果</h3>
+          <div class="container mb-5">
+            <p>対象のTwitter_idを見つけることができませんでした。<br>Twitter_idが正しく入力されているかご確認ください。</p>
           </div>
         <% elsif @results.present? %>
           <h3>検索結果</h3>         

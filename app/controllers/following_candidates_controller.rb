@@ -17,10 +17,15 @@ class FollowingCandidatesController < ApplicationController
       @following = GetFollowingService.new(current_user).get_following
 
       if @following == "error"
-        return @results = "error"
+        return @results = "too_many_requests"
       end
 
       @followers_result = GetFollowersService.new(current_user, screen_name, next_cursor).get_followers
+      
+      if @followers_result.any? { |k, v| k == "errors" }
+        return @results = "screen_name_error"
+      end
+
       @next_cursor = @followers_result["next_cursor"]
       @followers = @followers_result["users"]
       @followers.reject!{|x| x["id_str"].in?(@following)}
