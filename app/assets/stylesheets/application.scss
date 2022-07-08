@@ -28,14 +28,14 @@
   font-family: 'Zen Kaku Gothic New', sans-serif;
 }
 
-.follotter_icon {
-  width: 100%;
-  max-width: 200px;
+.start {
+  white-space: nowrap;
 }
 
 .inquiry-link {
   text-decoration: none;
   color: #727272 ;
+  white-space: nowrap;
 }
 
 /*application*/
@@ -76,6 +76,10 @@
 }
 
 /*index*/
+.index-header {
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 .name {
   text-decoration: none;
@@ -103,10 +107,16 @@
   background-image: none;
   width: 100%;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .footer-link{
   text-decoration: none;
   color: #ffffff;
   ;
+}
+
+.follotter_icon {
+  width: 100%;
+  max-width: 200px;
 }
