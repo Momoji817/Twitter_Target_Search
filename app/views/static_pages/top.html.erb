@@ -11,7 +11,7 @@
           <div class="col-auto">
             <%= link_to 'お問い合わせ', '/info', class: "inquiry-link" %>
           </div>
-          <div class="col-auto">
+          <div class="col-auto start">
             <%= link_to '始める', auth_at_provider_path(provider: :twitter), class: "button btn btn-dark text-white fw-bold" %>
           </div>
         </div>
@@ -24,7 +24,7 @@
   <div class="wrapper">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mt-5">
+        <div class="col-md-6 mt-4">
           <h1>Twitterのターゲット探しに時間を奪われる毎日から開放します！</h1>
           <ul class="list-group h5">
             <li>インフルエンサーのフォロワーを、お好みの条件で抽出できます</li>
@@ -92,16 +92,22 @@
   </div>
 </main>
 
-<footer class='footer'>
-  <ul class="row justify-content-md-center">
-    <div class="col-auto footer-link">
-      © 2022 #FOLLOTTER
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="mt-1 mb-1 mx-1">
+      <div class="container">
+        <div class="row">
+          <div class="col col-lg-8 footer-link">
+            © 2022 #FOLLOTTER
+          </div>
+          <div class="col-auto">
+            <%= link_to '利用規約', '/terms', class: "footer-link" %>
+          </div>
+          <div class="col-auto">
+            <%= link_to 'プライバシーポリシー', '/privacy', class: "footer-link" %>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-auto">
-      <%= link_to '利用規約', '/terms', class: "footer-link" %>
-    </div>
-    <div class="col-auto">
-      <%= link_to 'プライバシーポリシー', '/privacy', class: "footer-link" %>
-    </div>
-  </ul>
+  </div>
 </footer>
