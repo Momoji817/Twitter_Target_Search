@@ -82,6 +82,21 @@
                 </div>
               </div>
             <% end %>
+
+            <div class="container mt-5 mb-5">
+              <%= form_with url: following_candidates_path, method: :get do |f| %>
+                <%= f.hidden_field :screen_name, value: params[:screen_name], size: 15 %>
+                <%= f.hidden_field :followers_count_over, value: params[:followers_count_over], size: 15, min: 0 %>
+                <%= f.hidden_field :followers_count_less, value: params[:followers_count_less], size: 15 %>
+                <%= f.hidden_field :friends_count_over, value: params[:friends_count_over], size: 15, min: 0 %>
+                <%= f.hidden_field :friends_count_less, value: params[:friends_count_less], size: 15 %>
+                <%= f.hidden_field :created_at, value: params[:created_at] %>
+                <%= f.hidden_field :keyword, value: params[:keyword], size: 15 %>
+                <%= f.hidden_field :next_cursor, value: @next_cursor %>
+
+                <%= f.submit ' 同じ条件でターゲットをもっと探す ', name: "search", class: "button btn btn-dark text-white fw-bold" %>
+              <% end %>
+            </div>
           </div>
         <% elsif @results == [] %>
           <h3>検索結果</h3>
