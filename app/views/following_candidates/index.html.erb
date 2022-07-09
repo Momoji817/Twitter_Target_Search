@@ -56,7 +56,7 @@
         <% if @results == "too_many_requests" %>
           <h3>検索結果</h3>
           <div class="container mb-5">
-            <p>Twitterと通信を行うAPIの呼び出し回数制限を超えました。<br>しばらくしてから再度お試しください。</p>
+            <p>検索回数の上限に達しました。<br>5〜15分後にもう一度お試しください。</p>
           </div>
         <% elsif @results == "screen_name_error" %>
           <h3>検索結果</h3>
@@ -94,7 +94,8 @@
                 <%= f.hidden_field :keyword, value: params[:keyword], size: 15 %>
                 <%= f.hidden_field :next_cursor, value: @next_cursor %>
 
-                <%= f.submit ' 同じ条件でターゲットをもっと探す ', name: "search", class: "button btn btn-dark text-white fw-bold" %>
+                <%= f.submit " 同じ条件でもっと探す ", name: "search", class: "button btn btn-dark text-white fw-bold" %><br><br>
+                <%= link_to " 別の条件で検索する ", auth_at_provider_path(provider: :twitter), class: "button btn btn-danger text-white fw-bold" %>
               <% end %>
             </div>
           </div>
@@ -108,3 +109,15 @@
     </div>
   </div>
 </main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="mt-1 mb-1 mx-1">
+      <div class="container">
+        <div class="text-center">
+          <%= link_to 'FAQ', 'https://www.notion.so/7d7b0a7599c84fc89d7218e731f6d023', class: "footer-link" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
