@@ -1,1 +1,35 @@
-inherit_from: .rubocop_todo.yml
+AllCops:
+  Exclude:
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "db/**/*"
+    - "bin/**/*"
+    - "spec/**/*"
+    - "node_modules/**/*"
+    - "config/**/*"
+    - "Gemfile"
+    - "Rakefile"
+
+Metrics/AbcSize:
+  Max: 65
+
+Metrics/CyclomaticComplexity:
+  Max: 25
+
+Layout/LineLength:
+  Enabled: 198
+
+Metrics/PerceivedComplexity:
+  Max: 20
+
+Metrics/MethodLength:
+  Max: 30
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
