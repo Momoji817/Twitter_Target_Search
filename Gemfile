@@ -50,6 +50,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'simplecov', require: false
   gem 'rails_best_practices'
+  gem 'shoulda-matchers', '~> 5.0'
 end
 
 group :development do
