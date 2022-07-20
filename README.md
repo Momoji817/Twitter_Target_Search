@@ -1,4 +1,4 @@
-# #FOLLOTTER
+# #FOLLOTTER (フォロッター)
 ![FOLLOTTER logo_small](https://user-images.githubusercontent.com/88662582/178427608-2534c030-7327-402f-84ce-d5c5433a627e.png)
 
 【サービスURL】https://www.follotter-app.com/
@@ -19,7 +19,7 @@ Twitterでのフォロワー集めや、Twitterで何か宣伝したいと頑張
 - PC・スマホから誰でも簡単に使えるようにする
 
 ## 主な機能
-- ターゲット抽出に必要な検索条件を設定できる
+- インフルエンサーなど特定のTwitterアカウントのフォロワー内から、 ターゲット抽出に必要な検索条件を設定できる
     - 「フォロー数、フォロワー数、Twitter開始時期、プロフィール内のキーワード」からお好みで設定できる
 - 最新の情報を素早く設定できる
     - データベースを極力使わず、検索毎にAPIを叩く仕組みを導入
