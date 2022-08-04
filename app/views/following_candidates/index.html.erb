@@ -23,36 +23,75 @@
     <div class="container">
       <h4>ターゲット検索条件</h4>
       <div class="col-md-10 mt-3 mb-5">
-        <%= form_with url: following_candidates_path, method: :get do |f| %>
-          <div class="form-group">
-            <h6><%= f.label :screen_name, "■検索するインフルエンサーのTwitter_id" %></h6>
-            <p>@<%= f.text_field :screen_name, value: params[:screen_name], size: 15 %><span style="color:red"><sup>＊必須</sup></span><p><br>
-          </div>
-          <h6>■インフルエンサーのフォロワー抽出条件</h6>
-          <div class="form-group">
-            <%= f.label :followers_count_over, "フォロワー数" %><br>
-            <%= f.number_field :followers_count_over, value: params[:followers_count_over], size: 15, min: 0 %>以上
-            <%= f.number_field :followers_count_less, value: params[:followers_count_less], size: 15 %>以下<br>
-          </div>
-          <div class="form-group">
-            <%= f.label :friends_count_over, "フォロー数" %><br>
-            <%= f.number_field :friends_count_over, value: params[:friends_count_over], size: 15, min: 0 %>以上
-            <%= f.number_field :friends_count_less, value: params[:friends_count_less], size: 15 %>以下<br>
-          </div>
-          <div class="form-group">
-            <%= f.label :created_at, "Twitter開始時期" %><br>
-            <%= f.date_field :created_at, value: params[:created_at] %><br>
-          </div>
-          <div class="form-group">
-            <%= f.label :keyword, "自己紹介に入っているキーワード" %><br>
-            <%= f.text_field :keyword, value: params[:keyword], size: 15 %>
-            <%= f.hidden_field :next_cursor, value: @next_cursor %>
-          </div>
-          <div class="form-group">
-            <%= f.submit " 検索する ", name: "search", class: "button btn btn-dark text-white fw-bold" %><br><br>
-          </div>
-        <% end %>
-
+        <div class="col-md-6">
+          <%= form_with url: following_candidates_path, method: :get do |f| %>
+            <div class="form-group">
+              <h6><%= f.label :screen_name, "■検索するインフルエンサーのTwitter_id" %></h6>
+                <div class="row g-1">
+                  <div class="col-auto mt-2">
+                    <h6>@</h6>
+                  </div>
+                  <div class="col-5">
+                    <%= f.text_field :screen_name, class: 'form-control form-control-sm border border-dark', value: params[:screen_name], size: 15 %>
+                  </div>
+                  <div class="col-auto">
+                    <span style="color:red"><sup>＊必須</sup></span><p><br><br>
+                  </div>
+                </div>
+            </div>
+            <h6>■インフルエンサーのフォロワー抽出条件</h6>
+            <div class="form-group">
+              <p class="p-height"><%= f.label :followers_count_over, "フォロワー数" %></p>
+              <div class="row g-1">
+                <div class="col-4">
+                  <%= f.number_field :followers_count_over, class: 'form-control form-control-sm border border-dark', value: params[:followers_count_over], size: 15, min: 0 %>
+                </div>
+                <div class="col-auto mt-3">
+                  以上
+                </div>
+                <div class="col-4">
+                  <%= f.number_field :followers_count_less, class: 'form-control form-control-sm border border-dark', value: params[:followers_count_less], size: 15 %>
+                </div>
+                <div class="col-auto mt-3">
+                  以下<br>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <p class="p-height"><%= f.label :friends_count_over, "フォロー数" %></p>
+              <div class="row g-1">
+                <div class="col-4">
+                  <%= f.number_field :friends_count_over, class: 'form-control form-control-sm border border-dark', value: params[:friends_count_over], size: 15, min: 0 %>
+                </div>
+                <div class="col-auto mt-3">
+                  以上
+                </div>
+                <div class="col-4">
+                  <%= f.number_field :friends_count_less, class: 'form-control form-control-sm border border-dark', value: params[:friends_count_less], size: 15 %>
+                </div>
+                <div class="col-auto mt-3">
+                  以下<br>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <p class="p-height"><%= f.label :created_at, "Twitter開始時期" %></p>
+              <div class="col-4">
+                <%= f.date_field :created_at, class: 'form-control form-control-sm border border-dark', value: params[:created_at] %><br>
+              </div>
+            </div>
+            <div class="form-group">
+              <p class="p-height"><%= f.label :keyword, "自己紹介に入っているキーワード" %></p>
+              <div class="col-5">
+                <%= f.text_field :keyword, class: 'form-control form-control-sm border border-dark', value: params[:keyword], size: 15 %>
+                <%= f.hidden_field :next_cursor, value: @next_cursor %>
+              </div>
+            </div>
+            <div class="form-group">
+              <%= f.submit " 検索する ", name: "search", class: "button btn btn-dark text-white fw-bold" %><br><br>
+            </div>
+          <% end %>
+        </div>
         <% if @results == "too_many_requests" %>
           <h3>検索結果</h3>
           <div class="container mb-5">
